@@ -15,7 +15,7 @@ class sonar {
                         command => "apt-get install sonar --allow-unauthenticated",
 			require => Exec["update package sonar"],
 			unless => "dpkg -l | grep -c sonar";
-        }
+	}
 
 	file {
 		"/opt/sonar/conf/sonar.properties":
