@@ -5,8 +5,8 @@ class jenkins {
 		"download jenkins apt-key":
 			require => Package["openjdk-7-jdk"],
 			cwd => "/home/ubuntu/",
-			command => "wget http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add /home/ubuntu/jenkins-ci.org.key",
-			creates => "/home/ubuntu/jenkins-ci.org.key";
+			command => "wget -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -",
+			unless => "sudo apt-key list | grep -c Kohsuke";
 		"add jenkins repository to deb":
 			require => Exec["download jenkins apt-key"],
 			cwd => "/home/ubuntu/",
@@ -29,7 +29,7 @@ class jenkins {
 			owner => "root",
 			group => "root",
 			ensure => file,
-			require => Package["jenkins"]
+			require => Package["jenkins"],
 			notify => Service["jenkins"];
 	}
 
