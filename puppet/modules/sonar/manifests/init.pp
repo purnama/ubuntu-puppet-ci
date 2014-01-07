@@ -16,4 +16,9 @@ class sonar {
 			require => Exec["update package sonar"],
 			unless => "dpkg -l | grep -c sonar";
         }
+
+	service { "sonar":
+		ensure => running,
+		require => Exec["install sonar"];
+	}
 }

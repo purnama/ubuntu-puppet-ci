@@ -10,4 +10,5 @@ node default{
     include bootstrap
     include jenkins
     include sonar
+    include apache
 }

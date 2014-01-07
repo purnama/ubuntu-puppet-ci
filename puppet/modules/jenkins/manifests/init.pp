@@ -18,9 +18,14 @@ class jenkins {
 			unless => "dpkg -l | grep -c jenkins";
         }
 
-	package{"jenkins":
+	package {"jenkins":
 		ensure => present,
 		require => Exec["update package jenkins"];
+	}
+
+	service {"jenkins":
+		ensure => running,
+		require => Package["jenkins"];
 	}
 
 }
