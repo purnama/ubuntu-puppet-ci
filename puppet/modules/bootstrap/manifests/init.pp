@@ -9,4 +9,9 @@ class bootstrap {
         "libaio1", "unixodbc", "unzip", "bc", "zip", "openjdk-7-jdk", "openjdk-7-source", 
         "openjdk-7-demo", "openjdk-7-doc", "openjdk-7-jre-headless", "openjdk-7-jre-lib"]
 
+    # Install listed package
+    package { $packages:
+        ensure => present
+    }
+
 }
