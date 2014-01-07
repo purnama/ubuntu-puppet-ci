@@ -23,6 +23,16 @@ class jenkins {
 		require => Exec["update package jenkins"];
 	}
 
+	file {
+		"/etc/default/jenkins":
+			source => "puppet:///modules/jenkins/jenkins",
+			owner => "root",
+			group => "root",
+			ensure => file,
+			require => Package["jenkins"]
+			notify => Service["jenkins"];
+	}
+
 	service {"jenkins":
 		ensure => running,
 		require => Package["jenkins"];

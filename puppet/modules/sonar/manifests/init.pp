@@ -17,6 +17,16 @@ class sonar {
 			unless => "dpkg -l | grep -c sonar";
         }
 
+	file {
+		"/opt/sonar/conf/sonar.properties":
+			source => "puppet:///modules/sonar/sonar.properties",
+			owner => "sonar",
+			group => "adm",
+			ensure => file,
+			require => Exec["install sonar"],
+			notify => Service["sonar"];
+	}
+
 	service { "sonar":
 		ensure => running,
 		require => Exec["install sonar"];
