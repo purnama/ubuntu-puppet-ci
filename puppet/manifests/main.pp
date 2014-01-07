@@ -9,4 +9,5 @@ $globalUser = 'vagrant'
 node default{
     include bootstrap
     include jenkins
+    include sonar
 }
